@@ -1,0 +1,19 @@
+version: "3"
+
+volumes:
+  mongodb_volume:
+
+services:
+  stickers_bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - MONGO_DB_ADDR=mongodb
+      - MONGO_DB_PORT=27017
+  mongodb:
+    image: mongo
+    volumes:
+      - mongodb_volume:/data/db
+    restart: always
